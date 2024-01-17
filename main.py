@@ -5,8 +5,12 @@ from gtts import gTTS
 from langdetect import detect
 from uuid import uuid4
 
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
 def chat_with_mistral(user_input):
-    api_key = "f6jzkpIaRIqc93Xa7sxSc73A10TjRZUQ"
+    api_key = os.environ.get("mistral_api_key")
     model = "mistral-tiny"  # Use "Mistral-7B-v0.2" for "mistral-tiny"
 
     client = MistralClient(api_key=api_key)
