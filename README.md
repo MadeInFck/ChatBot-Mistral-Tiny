@@ -1,3 +1,5 @@
+[![Python application](https://github.com/MadeInFck/ChatBot-Mistral-Tiny/actions/workflows/python-app.yml/badge.svg)](https://github.com/MadeInFck/ChatBot-Mistral-Tiny/actions/workflows/python-app.yml)
+
 # ChatBot-Mistral-Tiny
  ChatBot based on [Mistral AI model (Mistral Tiny 7B)](mistral.ai) 
 
