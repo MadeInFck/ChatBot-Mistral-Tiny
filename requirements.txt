@@ -72,3 +72,6 @@ uvicorn
 websockets
 yarl
 zipp
+mistralai
+langdetect
+gtts
