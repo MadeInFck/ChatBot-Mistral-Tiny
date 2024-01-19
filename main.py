@@ -55,5 +55,5 @@ iface = gr.Interface(
     allow_flagging="never",
 )
 
-if __name__ == "__main__":
-    iface.launch()
+#if __name__ == "__main__":
+ #   iface.launch()
