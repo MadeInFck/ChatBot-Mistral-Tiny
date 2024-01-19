@@ -3,7 +3,7 @@ from mistralai.client import MistralClient
 from mistralai.models.chat_completion import ChatMessage
 from gtts import gTTS
 from langdetect import detect
-from uuid import uuid4
+
 
 import os
 from dotenv import load_dotenv
@@ -12,10 +12,8 @@ load_dotenv()
 
 
 def chat_with_mistral(user_input, model):
-    #print(model)
     api_key = os.environ.get("mistral_api_key")
     model = model
-
     client = MistralClient(api_key=api_key)
     messages = [ChatMessage(role="user", content=user_input)]
 
@@ -32,16 +30,13 @@ def chat_with_mistral(user_input, model):
 
 
 def text_to_speech(text):
-    language = detectLanguage(text)
-    #print(language)
-    audio = gTTS(text=text, lang=language, slow=False)
-    namefile = f'{uuid4()}' + '.mp3'
-    #print(namefile, type(namefile))
-    audio.save(namefile)
     if text == "":
         return None
     else:
-        return namefile
+        language = detectLanguage(text)
+        audio = gTTS(text=text, lang=language, slow=False)
+        audio.save(f'sample.mp3')
+        return f'sample.mp3'
 
 
 def detectLanguage(text):
@@ -50,10 +45,10 @@ def detectLanguage(text):
 
 iface = gr.Interface(
     fn=chat_with_mistral,
-    inputs=[gr.components.Textbox(label="Compose your message", placeholder="What do you need to know"),
-            gr.components.Dropdown(choices=[("Mistral Tiny", "mistral-tiny"), ("Mistral Small", "mistral-small"), ("Mistral Medium", "mistral-medium")], label="Choose your model", value="mistral-tiny")],
+    inputs=[gr.components.Textbox(label="Compose your message", placeholder="Prompt here!"),
+            gr.components.Dropdown(choices=[("Mistral Tiny", "mistral-tiny"), ("Mistral Small", "mistral-small"), ("Mistral Medium", "mistral-medium")], label="Choose your Mistral AI model", value="mistral-tiny")],
     outputs=[gr.components.Text(label="Chatbot response"),
-             gr.components.Audio(autoplay=True, label="Speak the response", )],
+             gr.components.Audio(autoplay=True, label="Audio transcription of the response", )],
     title="Chatbot powered by Mistral AI models",
     description="Interact with Mistral API via this chatbot.",
     examples=[["Give me a meal plan for the day."]],
