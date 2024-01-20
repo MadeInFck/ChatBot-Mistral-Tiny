@@ -23,6 +23,7 @@ frozenlist
 fsspec
 gradio
 gradio_client
+gtts
 h11
 httpcore
 httpx
@@ -33,12 +34,14 @@ Jinja2
 jsonschema
 jsonschema-specifications
 kiwisolver
+langdetect
 linkify-it-py
 markdown-it-py
 MarkupSafe
 matplotlib
 mdit-py-plugins
 mdurl
+mistralai
 multidict
 numpy
 orjson
@@ -51,6 +54,7 @@ pydantic_core
 pydub
 pyparsing
 python-dateutil
+python-dotenv
 python-multipart
 pytz
 PyYAML
@@ -72,6 +76,3 @@ uvicorn
 websockets
 yarl
 zipp
-mistralai
-langdetect
-gtts
