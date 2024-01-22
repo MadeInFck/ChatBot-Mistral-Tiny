@@ -1,3 +1,9 @@
+---
+title: ChatBot-Mistral
+app_file: run.py
+sdk: gradio
+sdk_version: 4.14.0
+---
 [![Python application](https://github.com/MadeInFck/ChatBot-Mistral-Tiny/actions/workflows/python-app.yml/badge.svg)](https://github.com/MadeInFck/ChatBot-Mistral-Tiny/actions/workflows/python-app.yml)
 
 # ChatBot-Mistral-Tiny

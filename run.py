@@ -13,4 +13,4 @@ app = FastAPI()
 async def root():
     return 'The chatbot is running at /chatbot', 200
 
-app = gr.mount_gradio_app(app, iface.launch(auth=(user, password)), path='/chatbot')
+app = gr.mount_gradio_app(app, iface.launch(auth=(user, password), server_name="0.0.0.0", server_port=5000), path='/chatbot')
