@@ -18,3 +18,6 @@ Answer from the bot is transcribed to speech and can be played if needed. Langua
 
 ![Snapshot of the ChatBot](/ChatBot-MistralAI.png)
 
+## Todos
+* Add chat interface type
+* Add dropdown to choose language for answer.
