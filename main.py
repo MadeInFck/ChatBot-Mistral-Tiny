@@ -75,34 +75,46 @@ def getLanguage(lang):
             return l[0]
 
 
-with gr.Blocks(theme="soft", title="Mistral Chatbot") as iface:
+with gr.Blocks(theme="base", title="Mistral Chatbot") as iface:
     # Markdown
     gr.Markdown("# Chatbot powered by Mistral AI models")
     gr.Markdown("## Interact with Mistral API via this chatbot.")
-    # Inputs
-    textbox = gr.components.Textbox(label="Compose your message", placeholder="Prompt here!", scale=2)
-    with gr.Row(equal_height=True):
-        clearBtn = gr.components.ClearButton(value="Clear")
-        submitBtn = gr.components.Button(value="Submit")
 
-    with gr.Row(equal_height=True):
-        modelDropdown = gr.components.Dropdown(scale=1,
-                                               choices=[("Mistral Tiny", "mistral-tiny"),
-                                                        ("Mistral Small", "mistral-small"),
-                                                        ("Mistral Medium", "mistral-medium")],
-                                               label="Choose your Mistral AI model",
-                                               value="mistral-tiny")
-        langDropdown = gr.components.Dropdown(scale=1,
-                                              choices=languages, label="Choose the language of the answer",
-                                              value="fr")
-    with gr.Row(equal_height=True):
-        token = gr.components.Number(value=100, scale=1, label="Number of maximum tokens", step=1, minimum=50,
-                                     maximum=1000, precision=0, info="Choose between 50 and 1000")
-        slider = gr.Slider(0, 1.0, value=0.2, step=0.1, scale=1, label="Température",
-                           info="Choose between 0 and 1, more accuracy close from 0")
-    # Outputs
-    outputs = [gr.components.Text(label="Chatbot response"),
-               gr.components.Audio(autoplay=True, label="Audio transcription of the response", )]
+    with gr.Row():
+        # Chatbot
+        with gr.Column(scale=4):
+            # Inputs
+            textbox = gr.components.Textbox(label="Compose your message", placeholder="Prompt here!", scale=2)
+            with gr.Row(equal_height=True):
+                clearBtn = gr.components.ClearButton(value="Clear", variant="stop")
+                submitBtn = gr.components.Button(value="Submit", variant="primary")
+
+            # Outputs
+            outputs = [gr.components.Text(label="Chatbot response"),
+                       gr.components.Audio(autoplay=True, label="Audio transcription of the response", )]
+
+        # Settings
+        with gr.Column(scale=1):
+            with gr.Row(equal_height=True):
+                modelDropdown = gr.components.Dropdown(scale=1,
+                                                       choices=[("Mistral Tiny", "mistral-tiny"),
+                                                                ("Mistral Small", "mistral-small"),
+                                                                ("Mistral Medium", "mistral-medium")],
+                                                       label="Choose your Mistral AI model",
+                                                       value="mistral-tiny")
+                langDropdown = gr.components.Dropdown(scale=1,
+                                                      choices=languages, label="Choose the language of the answer",
+                                                      value="fr")
+            with gr.Row(equal_height=True):
+                token = gr.components.Number(value=1000, scale=1, label="Number of maximum tokens", step=10,
+                                             minimum=100,
+                                             maximum=10000, precision=0, info="Choose between 100 and 10000")
+                slider = gr.Slider(0, 1.0, value=0.2, step=0.1, scale=1, label="Température",
+                                   info="Choose between 0 and 1, more accuracy close from 0")
+
+
+
+
 
     # Submit button
     submitBtn.click(chat_with_mistral, inputs=[textbox, modelDropdown, langDropdown, token, slider], outputs=outputs)
@@ -112,7 +124,7 @@ with gr.Blocks(theme="soft", title="Mistral Chatbot") as iface:
 
     # Examples
     # def chat_with_mistral(user_input, model, language, token, temperature)
-    gr.Examples([["Give me a meal plan for the day.", 'mistral-tiny', "fr", None, 0.2]], textbox, outputs,
+    gr.Examples([["Give me a meal plan for the day."]], textbox, outputs,
                 chat_with_mistral, cache_examples=False)
 
 # if __name__ == "__main__":
